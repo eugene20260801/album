@@ -20,12 +20,10 @@
   },
   "lint-staged": {
     "album-frontend/**/*.{ts,tsx,js,jsx}": [
-      "cd album-frontend && eslint --fix",
-      "cd album-frontend && prettier --write"
+      "prettier --write"
     ],
     "album-backend/**/*.{ts,js}": [
-      "cd album-backend && eslint --fix || true",
-      "cd album-backend && prettier --write"
+      "prettier --write"
     ]
   }
 }
