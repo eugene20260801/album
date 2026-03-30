@@ -1,0 +1,31 @@
+{
+  "name": "album-monorepo",
+  "version": "1.0.0",
+  "description": "Album application monorepo with frontend and backend",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "dev": "echo 'Run dev scripts from individual packages'",
+    "build": "echo 'Run build scripts from individual packages'",
+    "lint": "echo 'Run lint scripts from individual packages'",
+    "type-check": "echo 'Run type-check from individual packages'"
+  },
+  "workspaces": [
+    "album-frontend",
+    "album-backend"
+  ],
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0"
+  },
+  "lint-staged": {
+    "album-frontend/**/*.{ts,tsx,js,jsx}": [
+      "cd album-frontend && eslint --fix",
+      "cd album-frontend && prettier --write"
+    ],
+    "album-backend/**/*.{ts,js}": [
+      "cd album-backend && eslint --fix || true",
+      "cd album-backend && prettier --write"
+    ]
+  }
+}
