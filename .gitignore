@@ -51,3 +51,4 @@ Thumbs.db
 # Ignore other temporary files
 tmp/
 cache/
+/generated/prisma

@@ -5,6 +5,13 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm install
 
-COPY . .
+# Copy the rest of the code
+COPY prisma ./prisma
+COPY .env .env
+COPY src ./src
 
-CMD ["npx", "ts-node-dev", "src/index.ts"]
+# Generate Prisma client
+RUN npx prisma generate
+
+# Run migrations and start backend
+CMD npx prisma migrate deploy && npx ts-node src/index.ts
