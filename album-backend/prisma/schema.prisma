@@ -8,7 +8,37 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String
-  email String  @unique
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String @default("changeme") 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) 
+  photos    Photo[]  // One-to-many relationship
+  albums    Album[]  // Optional: if you want albums
+}
+
+
+model Album {
+  id        Int      @id @default(autoincrement())
+  title     String
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) 
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  photos    Photo[]
+}
+
+model Photo {
+  id        Int      @id @default(autoincrement())
+  url       String
+  title     String?
+  description String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) 
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  album     Album?   @relation(fields: [albumId], references: [id])
+  albumId   Int?
 }
